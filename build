@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+FLAGS="-Wall -Wextra -O2 -s"
+
+[ "$1" = "clean" ] && {
+    rm chmod_cal digest_hash token_gen uuidv4
+    exit 0
+}
+
+[ "$(command -v cc)" ] && {
+    cc $FLAGS chmod_cal.c -o chmod_cal
+    cc $FLAGS digest_hash.c -o digest_hash -lcrypto
+    cc $FLAGS token_gen.c -o token_gen
+    cc $FLAGS uuidv4.c -o uuidv4
+    exit 0
+}
+
+echo Error: No C compiler found
+exit 1
